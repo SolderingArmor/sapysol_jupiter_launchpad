@@ -10,8 +10,8 @@ from ..program_id          import PROGRAM_ID
 #
 class CloseClaimStatusAccounts(typing.TypedDict):
     claim_status: Pubkey
-    claimant: Pubkey
-    admin: Pubkey
+    claimant:     Pubkey
+    admin:        Pubkey
 
 # ================================================================================
 #
