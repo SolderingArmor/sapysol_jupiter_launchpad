@@ -36,12 +36,14 @@ class SapysolJupiterDistributorBatcher:
                  tokenMint:          SapysolPubkey,
                  keypairsList:       List[SapysolKeypair],
                  connectionOverride: List[Union[str, Client]] = None,
+                 txParams:           SapysolTxParams = SapysolTxParams(),
                  numThreads:         int  = 20):
 
         self.CONNECTION:          Client                   = connection
         self.TOKEN_MINT:          Pubkey                   = MakePubkey(tokenMint)
         self.TOKEN:               SapysolToken             = SapysolToken(connection=connection, tokenMint=tokenMint)
         self.KEYPAIRS_LIST:       List[Keypair]            = [MakeKeypair(k) for k in keypairsList]
+        self.TX_PARAMS:           SapysolTxParams          = txParams
         self.CONNECTION_OVERRIDE: List[Union[str, Client]] = connectionOverride
         self.DISTRIBUTOR_LIST:    dict                     = {}
         self.BATCHER:             SapysolBatcher = SapysolBatcher(callback    = self.ClaimSingle,
@@ -79,7 +81,7 @@ class SapysolJupiterDistributorBatcher:
         while True:
             delimiter: int = 10**self.TOKEN.TOKEN_INFO.decimals
             print(f"{str(wallet.pubkey()):>44}: Claiming {params.AMOUNT/delimiter} tokens...")
-            tx: SapysolTx = SapysolTx(connection=self.CONNECTION, payer=wallet)
+            tx: SapysolTx = SapysolTx(connection=self.CONNECTION, payer=wallet, txParams=self.TX_PARAMS)
             tx.FromInstructionsLegacy(instructions=ix)
             result: SapysolTxStatus = tx.Sign([wallet]).WaitForTx(self.CONNECTION_OVERRIDE)
             if result == SapysolTxStatus.SUCCESS:

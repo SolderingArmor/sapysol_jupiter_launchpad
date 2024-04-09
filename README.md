@@ -42,6 +42,7 @@ keypairsList: List[Keypair] = [
 batcher = SapysolJupiterDistributorBatcher(connection   = connection,
                                            tokenMint    = "ZEUS1aR7aX8DFFJf5QjWj2ftDDdNTroMNGo8YoQm3Gq",
                                            keypairsList = keypairsList,
+                                           txParams     = SapysolTxParams(),
                                            numThreads   = 10)
 
 # Start claiming
