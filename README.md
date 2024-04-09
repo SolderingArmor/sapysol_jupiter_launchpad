@@ -2,6 +2,8 @@
 
 `sapysol` Jupiter LFG Launchpad Claim implementation. Based on JavaScript from [Jupiter LFG Website](https://lfg.jup.ag) _(from Chrome developer tools)_, written from scratch with the help of [AnchorPy](https://github.com/kevinheavey/anchorpy).
 
+WARNING! `sapysol_jupiter_launchpad` is currently in `alpha` version, so, bugs, lack of tests and descriptions are expected. Some things may not work, future versions may bring breaking changes.
+
 # Installation
 
 ```sh
@@ -44,7 +46,6 @@ batcher = SapysolJupiterDistributorBatcher(connection   = connection,
 
 # Start claiming
 batcher.Start()
-
 ```
 
 TODO
